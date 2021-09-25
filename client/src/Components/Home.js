@@ -1,7 +1,10 @@
 import Logout from "./Logout"
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-
+import NavBar from "./NavBar"
+import PostcardList from "./PostcardList"
+import Menu from "./Menu"
+import PostcardGenerator from "./PostcardGenerator"
 
 function Home({user, setUser}){
     const history = useHistory()
@@ -27,8 +30,14 @@ function Home({user, setUser}){
 
     return (
         <>  
-            <p>{user.username}</p>
+            <NavBar />
+            <Menu />
+           
+            <PostcardList></PostcardList>
             <Logout setUser={setUser}/>
+            <PostcardGenerator />
+
+            <p>{user.username}</p>
         </>
     )
 }
