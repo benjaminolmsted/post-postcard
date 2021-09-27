@@ -1,9 +1,8 @@
 import { useRef, useEffect } from 'react'
 import { Container } from '@mui/material'
 
-function PostcardGenerator(){
+function PostcardGenerator({ user }){
     let ref = useRef()
-    let imgRef = useRef()
 
     const getPixelRatio = context => {
             var backingStore =
@@ -40,14 +39,16 @@ function PostcardGenerator(){
         context.fill()
     })
 
-    function saveImage(){
+   async function saveImage(){
         let canvas = ref.current
-        let image = imgRef.current
         let imageURL = canvas.toDataURL()
 
-        image.src = imageURL
-        const getURL = uploadToAWS(imageURL, "postcards")
-        //console.log(imageURL)
+        const getURL = await uploadToAWS(imageURL, "postcards")
+        // console.log(getURL)
+        // console.log(user)
+        const response = await fetch("/postcards", {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({image_url: getURL, user_id: user.id})})
+        const postcard = await response.json()
+        console.log(postcard)    
     }
 
     function dataURItoBlob(dataURI) {
@@ -62,23 +63,12 @@ function PostcardGenerator(){
      const uploadToAWS = async(file, directory) => {
         
         const  data  = await fetch(`/presign?filename=postcard&fileType=image/png&directory=${directory}`, {method: "GET"})
-        
-
-        const blob = dataURItoBlob(file)
-    //API.get("/upload", {params: {filename: file.name, fileType: file.type, directory: directory}, headers: APIHelpers.authorizationHeaders(auth_token)});
-
         const json = await data.json();
-        
-    const { post_url, get_url } = json;
-    console.log(file)
-    console.log(post_url, get_url)
-    
-    const awsResp = await fetch(post_url, {method: 'PUT', headers: {"Content-Type": 'image/png','acl': 'public-read'}, body: blob})
-    console.log(awsResp)
-    // const options = {
-    //   headers: {"Content-Type": file.type,'acl': 'public-read'},
-    // }
-    // await axios.put(post_url, file, options)
+        const { post_url, get_url } = json;
+        const blob = dataURItoBlob(file)
+        const awsResp = await fetch(post_url, {method: 'PUT', headers: {"Content-Type": 'image/png','acl': 'public-read'}, body: blob})
+        console.log(awsResp)
+
      return get_url;
   }
     
@@ -86,9 +76,8 @@ function PostcardGenerator(){
 
 
     return (<>
-        <Container>
+        <Container maxWidth="lg"  sx={{ marginTop: "64px"}}>
          <canvas onClick={saveImage} ref={ref} style ={{width: "1200px", height: "800px"}}></canvas>
-         <img ref={imgRef}/>
         </Container>
     </>)
 }

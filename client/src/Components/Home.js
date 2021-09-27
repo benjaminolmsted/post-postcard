@@ -5,6 +5,8 @@ import NavBar from "./NavBar"
 import PostcardList from "./PostcardList"
 import Menu from "./Menu"
 import PostcardGenerator from "./PostcardGenerator"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom" 
+
 
 function Home({user, setUser}){
     const history = useHistory()
@@ -32,12 +34,18 @@ function Home({user, setUser}){
         <>  
             <NavBar />
             <Menu />
-           
-            <PostcardList></PostcardList>
-            <Logout setUser={setUser}/>
-            <PostcardGenerator />
-
-            <p>{user.username}</p>
+            <Switch>
+                <Route path='/generator'>
+                    <PostcardGenerator user={user}/>
+                </Route>
+                <Route path='/logout'>
+                    <Logout setUser={setUser}/>
+                    <p>{user.username}</p>
+                </Route>
+                <Route path='/'>
+                    <PostcardList></PostcardList>
+                </Route>
+            </Switch>
         </>
     )
 }

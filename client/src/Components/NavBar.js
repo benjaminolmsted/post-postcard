@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from '@mui/material';
 
 export default function NavBar() {
   return (
@@ -22,7 +23,7 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Post-a-Card
+            <Link href='/' color="inherit">{ 'Post-a-Card' }</Link>
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
