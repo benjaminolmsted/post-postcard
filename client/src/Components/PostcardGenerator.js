@@ -46,7 +46,44 @@ function PostcardGenerator(){
         let imageURL = canvas.toDataURL()
 
         image.src = imageURL
+        const getURL = uploadToAWS(imageURL, "postcards")
+        //console.log(imageURL)
     }
+
+    function dataURItoBlob(dataURI) {
+        var binary = atob(dataURI.split(',')[1]);
+        var array = [];
+        for(var i = 0; i < binary.length; i++) {
+            array.push(binary.charCodeAt(i));
+        }
+        return new Blob([new Uint8Array(array)], {type: 'image/png'});
+    }
+    
+     const uploadToAWS = async(file, directory) => {
+        
+        const  data  = await fetch(`/presign?filename=postcard&fileType=image/png&directory=${directory}`, {method: "GET"})
+        
+
+        const blob = dataURItoBlob(file)
+    //API.get("/upload", {params: {filename: file.name, fileType: file.type, directory: directory}, headers: APIHelpers.authorizationHeaders(auth_token)});
+
+        const json = await data.json();
+        
+    const { post_url, get_url } = json;
+    console.log(file)
+    console.log(post_url, get_url)
+    
+    const awsResp = await fetch(post_url, {method: 'PUT', headers: {"Content-Type": 'image/png','acl': 'public-read'}, body: blob})
+    console.log(awsResp)
+    // const options = {
+    //   headers: {"Content-Type": file.type,'acl': 'public-read'},
+    // }
+    // await axios.put(post_url, file, options)
+     return get_url;
+  }
+    
+
+
 
     return (<>
         <Container>
