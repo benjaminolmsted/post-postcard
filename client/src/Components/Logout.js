@@ -9,7 +9,7 @@ function Logout({ setUser }){
     }
 
     return (
-        <Button onClick={handleLogout}>Logout</Button>
+        <Button onClick={handleLogout} color='inherit'>Logout</Button>
     )
 
 }

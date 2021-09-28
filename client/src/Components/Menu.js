@@ -9,11 +9,24 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { useHistory } from 'react-router-dom'
+import BurstModeIcon from '@mui/icons-material/BurstMode';
+import PanoramaIcon from '@mui/icons-material/Panorama';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShopIcon from '@mui/icons-material/Shop';
+import Badge from '@material-ui/core/Badge';
 
-function Menu(){
+
+function Menu({ cart }){
     const drawerWidth = 240
+    const history = useHistory()
+
+    function goTo(url){
+      history.push(url)
+    }
+
+
     return (<> <Drawer
         variant="permanent"
         sx={{
@@ -25,25 +38,41 @@ function Menu(){
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
+              <ListItem onClick={()=>goTo('/')} button key={"All postcards"}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <BurstModeIcon />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={"All postcards"} />
               </ListItem>
-            ))}
+              <ListItem onClick={()=>goTo('/my-postcards')} button key={"My postcards"}>
+                <ListItemIcon>
+                  <PanoramaIcon />
+                </ListItemIcon>
+                <ListItemText primary={"My postcards"} />
+              </ListItem>
+              <ListItem onClick={()=>goTo('/generator')} button key={"Generate postcard"}>
+                <ListItemIcon>
+                  <AppRegistrationIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Generate postcard"} />
+              </ListItem>
           </List>
           <Divider />
           <List>
-            {['Cart', 'Orders', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
+              <ListItem onClick={()=>goTo('/cart')} button key={"Cart"}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <Badge  badgeContent={cart.length} color="primary">
+                  <ShoppingCartIcon />
+                </Badge>
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={"Cart"} />
               </ListItem>
-            ))}
+              <ListItem onClick={()=>goTo('/orders')} button key={"Orders"}>
+                <ListItemIcon>
+                  <ShopIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Orders"} />
+              </ListItem>
           </List>
         </Box>
       </Drawer></>)

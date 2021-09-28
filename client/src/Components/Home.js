@@ -6,11 +6,12 @@ import PostcardList from "./PostcardList"
 import Menu from "./Menu"
 import PostcardGenerator from "./PostcardGenerator"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom" 
-
+import Cart from "./Cart"
 
 function Home({user, setUser}){
     const history = useHistory()
     const [isLoading, setIsLoading] = useState(true)
+    const [cart, setCart] = useState([])
 
     useEffect(()=>{
         fetch('/me')
@@ -32,18 +33,17 @@ function Home({user, setUser}){
 
     return (
         <>  
-            <NavBar />
-            <Menu />
+            <NavBar setUser={setUser}/>
+            <Menu cart={cart}/>
             <Switch>
                 <Route path='/generator'>
                     <PostcardGenerator user={user}/>
                 </Route>
-                <Route path='/logout'>
-                    <Logout setUser={setUser}/>
-                    <p>{user.username}</p>
+                <Route path='/cart'>
+                    <Cart cart={cart} />
                 </Route>
                 <Route path='/'>
-                    <PostcardList></PostcardList>
+                    <PostcardList cart={cart} setCart={setCart}></PostcardList>
                 </Route>
             </Switch>
         </>

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { Container } from '@mui/material'
+import { Button, Container } from '@mui/material'
 
 function PostcardGenerator({ user }){
     let ref = useRef()
@@ -76,8 +76,11 @@ function PostcardGenerator({ user }){
 
 
     return (<>
-        <Container maxWidth="lg"  sx={{ marginTop: "64px"}}>
-         <canvas onClick={saveImage} ref={ref} style ={{width: "1200px", height: "800px"}}></canvas>
+        <Container maxWidth="lg"  sx={{ marginTop: "84px"}}>
+         <canvas ref={ref} style ={{width: "1200px", height: "800px"}}></canvas>
+         <Button onClick={saveImage}>Save</Button>
+
+         <Button>Generate</Button>
         </Container>
     </>)
 }

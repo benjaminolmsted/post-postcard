@@ -7,26 +7,18 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from '@mui/material';
+import Logout from './Logout'
 
-export default function NavBar() {
+export default function NavBar({ setUser }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link href='/' color="inherit">{ 'Post-a-Card' }</Link>
           </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
+            <Logout setUser={setUser} />
+          </Toolbar>
       </AppBar>
     </Box>
   );
