@@ -18,7 +18,7 @@ function PostcardList({ cart, setCart }){
         <Grid container spacing={2}>
             {postcards.map((postcard)=>( 
                 <Grid item xs={4} >
-                    <PostcardCard postcard={postcard} cart={cart} setCart={setCart}/>
+                    <PostcardCard postcard={postcard} postcards={postcards} setPostcards={setPostcards} cart={cart} setCart={setCart}/>
                 </Grid>
                 ))}
         </Grid>

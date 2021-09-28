@@ -1,24 +1,57 @@
-import { Button, Card } from "@mui/material"
+import { Button, Card, Box, Modal } from "@mui/material"
 import { useState } from 'react'
 
-function PostcardCard({ postcard, cart, setCart }){
+
+function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
    const [showDelete, setShowDelete] = useState(false)
+   const [open, setOpen] = useState(false);
+   const handleOpen = () => setOpen(true);
+   const handleClose = () => setOpen(false);
+
+   const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+
     function deletePostcard(){
         fetch(`/postcards/${postcard.id}`, {method: "DELETE"})
+        setPostcards(postcards.filter((pc)=> pc.id !== postcard.id ))
     }
 
     function addToCart(){
         setCart([postcard, ...cart])
     }
 
+    function showBig(){
+        setOpen(true)
+    }
+
     return (<>
     <Card raised onMouseEnter={() => setShowDelete(true)} onMouseLeave={() => setShowDelete(false)}>
-        <img width="100%" src={postcard.image_url}></img>
+        <img onClick={showBig} width="100%" src={postcard.image_url}></img>
         {showDelete ? <>
                         <Button onClick={deletePostcard}> Delete </Button>
                         <Button onClick={addToCart}>Add to Cart</Button>  
                         </> : null }
     </Card>
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+         <img onClick={showBig} width="100%" src={postcard.image_url}></img>
+        </Box>
+      </Modal>
     </>)
 }
 

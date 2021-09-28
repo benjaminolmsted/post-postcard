@@ -39,6 +39,33 @@ function PostcardGenerator({ user }){
         context.fill()
     })
 
+    function randomPrimary(){
+        let colors = ['#00FFFF', '#FFFFFF', '#0000FF', '#FF00FF', '#FF0000', '#00FF00', '#FF0000']
+        return colors[Math.floor(Math.random()*colors.length)]
+    }
+
+    function randomInt(max){
+        return Math.floor(Math.random()*max)
+    }
+
+    function randomFloat(max){
+        return Math.random()*max
+    }
+
+   function generatePostcard(){
+    let canvas = ref.current
+    let context = canvas.getContext('2d')
+    context.globalCompositeOperation = 'difference'
+
+    for(let i=0; i<100; i++ ){
+        context.fillStyle = randomPrimary()
+        context.beginPath()
+        context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width/15), randomFloat(2 * Math.PI), randomFloat(2 * Math.PI))
+        context.fill()    
+    }
+
+   }
+
    async function saveImage(){
         let canvas = ref.current
         let imageURL = canvas.toDataURL()
@@ -80,7 +107,7 @@ function PostcardGenerator({ user }){
          <canvas ref={ref} style ={{width: "1200px", height: "800px"}}></canvas>
          <Button onClick={saveImage}>Save</Button>
 
-         <Button>Generate</Button>
+         <Button onClick={generatePostcard}>Generate</Button>
         </Container>
     </>)
 }
