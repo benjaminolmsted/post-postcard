@@ -5,7 +5,6 @@ import { useState } from 'react'
 function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
    const [showDelete, setShowDelete] = useState(false)
    const [open, setOpen] = useState(false);
-   const handleOpen = () => setOpen(true);
    const handleClose = () => setOpen(false);
 
    const style = {
@@ -15,9 +14,8 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
     transform: 'translate(-50%, -50%)',
     width: 800,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 1,
   };
 
 
@@ -35,7 +33,9 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
     }
 
     return (<>
-    <Card raised onMouseEnter={() => setShowDelete(true)} onMouseLeave={() => setShowDelete(false)}>
+    <Card raised onMouseEnter={() => setShowDelete(true)} 
+    onMouseLeave={() => setShowDelete(false)}
+    sx={{ borderRadius: 0 }}>
         <img onClick={showBig} width="100%" src={postcard.image_url}></img>
         {showDelete ? <>
                         <Button onClick={deletePostcard}> Delete </Button>

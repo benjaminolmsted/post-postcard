@@ -7,6 +7,7 @@ import Menu from "./Menu"
 import PostcardGenerator from "./PostcardGenerator"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom" 
 import Cart from "./Cart"
+import Checkout from "./Checkout"
 
 function Home({user, setUser}){
     const history = useHistory()
@@ -40,7 +41,10 @@ function Home({user, setUser}){
                     <PostcardGenerator user={user}/>
                 </Route>
                 <Route path='/cart'>
-                    <Cart cart={cart} />
+                    <Cart cart={cart} setCart={setCart}/>
+                </Route>
+                <Route path="/checkout">
+                    <Checkout cart={cart}></Checkout>
                 </Route>
                 <Route path='/'>
                     <PostcardList cart={cart} setCart={setCart}></PostcardList>

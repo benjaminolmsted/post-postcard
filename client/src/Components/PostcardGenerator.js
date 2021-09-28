@@ -32,11 +32,6 @@ function PostcardGenerator({ user }){
         canvas.height = 2*height * ratio;
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
-
-
-        context.beginPath()
-        context.arc(50, 50, 50, 0, 2 * Math.PI)
-        context.fill()
     })
 
     function randomPrimary(){
@@ -53,17 +48,38 @@ function PostcardGenerator({ user }){
     }
 
    function generatePostcard(){
+        let canvas = ref.current
+        let context = canvas.getContext('2d')
+        context.globalCompositeOperation = 'difference'
+
+        for(let i=0; i<canvas.width; i+=150 ){
+            context.fillStyle = randomPrimary()
+            //context.beginPath()
+            //context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width/15), randomFloat(2 * Math.PI), randomFloat(2 * Math.PI))
+           // context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width/5), 0, 2 * Math.PI)
+           // context.fill()
+              context.fillRect(i, 0, i+150, canvas.height) 
+        //    context.fillRect(0, i, canvas.width, i+1)  
+        }
+        for(let i=0; i<canvas.width; i+=150){
+            context.fillStyle = randomPrimary()
+            context.fillRect(0, i, canvas.width, i+150)
+        }
+        for(let i=0; i<canvas.width; i+=150 ){
+            context.fillStyle = randomPrimary()
+            context.beginPath()
+            //context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width/15), randomFloat(2 * Math.PI), randomFloat(2 * Math.PI))
+           context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width/5), 0, 2 * Math.PI)
+           context.fill()
+              //context.fillRect(i, 0, i+150, canvas.height) 
+        //    context.fillRect(0, i, canvas.width, i+1)  
+        }
+   }
+
+   function clearPostcard(){
     let canvas = ref.current
     let context = canvas.getContext('2d')
-    context.globalCompositeOperation = 'difference'
-
-    for(let i=0; i<100; i++ ){
-        context.fillStyle = randomPrimary()
-        context.beginPath()
-        context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width/15), randomFloat(2 * Math.PI), randomFloat(2 * Math.PI))
-        context.fill()    
-    }
-
+    context.clearRect(0, 0, canvas.width, canvas.height)
    }
 
    async function saveImage(){
@@ -108,6 +124,8 @@ function PostcardGenerator({ user }){
          <Button onClick={saveImage}>Save</Button>
 
          <Button onClick={generatePostcard}>Generate</Button>
+
+         <Button onClick={clearPostcard}>Clear</Button>
         </Container>
     </>)
 }
