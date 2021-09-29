@@ -1,11 +1,10 @@
-import Logout from "./Logout"
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import NavBar from "./NavBar"
 import PostcardList from "./PostcardList"
 import Menu from "./Menu"
 import PostcardGenerator from "./PostcardGenerator"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom" 
+import { Switch, Route } from "react-router-dom" 
 import Cart from "./Cart"
 import Checkout from "./Checkout"
 
@@ -34,19 +33,7 @@ function Home({user, setUser}){
         }
 
         fetchUser()
-        //while (!user) {console.log(user)}
-       
-        // fetch('/me')
-        // .then((resp)=>{
-        //         if(resp.ok){
-        //             resp.json().then((user)=>{
-        //                setUser(user)
-        //                setIsLoading(false)
-        //         })}else{
-        //             setIsLoading(false)
-        //         }
-            
-        //     })
+    
         }, [])
 
     async function addToCart(postcardId){

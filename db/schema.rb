@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_231209) do
+ActiveRecord::Schema.define(version: 2021_09_29_192459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,29 @@ ActiveRecord::Schema.define(version: 2021_09_28_231209) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["postcard_id"], name: "index_carts_on_postcard_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "order_postcards", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "postcard_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_postcards_on_order_id"
+    t.index ["postcard_id"], name: "index_order_postcards_on_postcard_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "country"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "postcards", force: :cascade do |t|
@@ -42,5 +65,7 @@ ActiveRecord::Schema.define(version: 2021_09_28_231209) do
 
   add_foreign_key "carts", "postcards"
   add_foreign_key "carts", "users"
+  add_foreign_key "order_postcards", "orders"
+  add_foreign_key "order_postcards", "postcards"
   add_foreign_key "postcards", "users"
 end

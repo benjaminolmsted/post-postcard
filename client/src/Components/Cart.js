@@ -1,11 +1,12 @@
 import { Container, Grid, Button, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import PostcardCartCard from './PostcardCartCard'
+import { useHistory } from 'react-router-dom'
 
 const pricePerPostcard = 1.29;
 
 function Cart({ cart, setCart }){
-    
+    const history = useHistory() 
     function removeFromCart(cartItem){
         fetch(`/carts/${cartItem.id}`, {method: 'DELETE'})
         setCart(cart.filter((cartI)=> cartI.id !== cartItem.id))
@@ -13,14 +14,16 @@ function Cart({ cart, setCart }){
     }
 
     function checkout(){
-
+        history.push('/checkout')
     }
+
+
     return (    
     <Container maxWidth="md"  sx={{ marginTop: "64px"}}>    
         <Grid container spacing={2}>
             {cart.map((cartItem)=>( 
                 <Grid item xs={12} >
-                    <PostcardCartCard cartItem={cartItem} removeFromCart={removeFromCart}/>
+                    <PostcardCartCard key={cartItem.id} cartItem={cartItem} removeFromCart={removeFromCart}/>
                 </Grid>
                 ))}
         </Grid>
