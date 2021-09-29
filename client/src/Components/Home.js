@@ -7,6 +7,7 @@ import PostcardGenerator from "./PostcardGenerator"
 import { Switch, Route } from "react-router-dom" 
 import Cart from "./Cart"
 import Checkout from "./Checkout"
+import Orders from "./Orders"
 
 function Home({user, setUser}){
     const history = useHistory()
@@ -63,7 +64,10 @@ function Home({user, setUser}){
                     <Cart cart={cart} setCart={setCart}/>
                 </Route>
                 <Route path="/checkout">
-                    <Checkout cart={cart}></Checkout>
+                    <Checkout cart={cart} user={user}></Checkout>
+                </Route>
+                <Route path='/orders'>
+                    <Orders></Orders>
                 </Route>
                 <Route path='/'>
                     <PostcardList cart={cart} setCart={setCart} addToCart={addToCart}></PostcardList>

@@ -9,9 +9,11 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 
-function Checkout({ cart }){
+function Checkout({ cart, user }){
     const [step, setStep] = useState(0)
     const [address, setAddress] = useState({
+        first_name: '',
+        last_name: '',
 
     })
 
@@ -24,7 +26,10 @@ function Checkout({ cart }){
     }
 
     function placeOrder(){
-
+        fetch('/orders', {method: 'POST', 
+                        headers: {'Content-Type': 'application/json'}, 
+                        body: JSON.stringify({...address, user_id: user.id})})
+        console.log({...address, user_id: user.id})
     }
 
 
