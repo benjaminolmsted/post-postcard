@@ -6,10 +6,10 @@ const pricePerPostcard = 1.29;
 
 function Cart({ cart, setCart }){
     
-    function removeFromCart(postcardId){
-        setCart(cart.filter((postcard)=> postcard.id !== postcardId))
-        //remove from cart on backend
-
+    function removeFromCart(cartItem){
+        fetch(`/carts/${cartItem.id}`, {method: 'DELETE'})
+        setCart(cart.filter((cartI)=> cartI.id !== cartItem.id))
+        
     }
 
     function checkout(){
@@ -18,9 +18,9 @@ function Cart({ cart, setCart }){
     return (    
     <Container maxWidth="md"  sx={{ marginTop: "64px"}}>    
         <Grid container spacing={2}>
-            {cart.map((postcard)=>( 
+            {cart.map((cartItem)=>( 
                 <Grid item xs={12} >
-                    <PostcardCartCard postcard={postcard} removeFromCart={removeFromCart}/>
+                    <PostcardCartCard cartItem={cartItem} removeFromCart={removeFromCart}/>
                 </Grid>
                 ))}
         </Grid>

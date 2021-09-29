@@ -15,18 +15,50 @@ function Home({user, setUser}){
     const [cart, setCart] = useState([])
 
     useEffect(()=>{
-        fetch('/me')
-        .then((resp)=>{
-                if(resp.ok){
-                    resp.json().then((user)=>{
-                       setUser(user)
-                       setIsLoading(false)
-                })}else{
-                    setIsLoading(false)
-                }
+        const fetchUser = async ()=>{
+            const resp = await fetch('/me')
+            if(resp.ok){
+                const fetchedUser = await resp.json()
+                setUser(fetchedUser)
+                fetchCart(fetchedUser)
+                setIsLoading(false)
+            }else{
+                setIsLoading(false)
+            }
+        }
+        
+        const fetchCart = async (fetchedUser)=>{
+            const resp = await fetch(`/usercart/${fetchedUser.id}`)
+            const cartItems = await resp.json()
+            setCart(cartItems)
+        }
+
+        fetchUser()
+        //while (!user) {console.log(user)}
+       
+        // fetch('/me')
+        // .then((resp)=>{
+        //         if(resp.ok){
+        //             resp.json().then((user)=>{
+        //                setUser(user)
+        //                setIsLoading(false)
+        //         })}else{
+        //             setIsLoading(false)
+        //         }
             
-            })
+        //     })
         }, [])
+
+    async function addToCart(postcardId){
+        const resp = await fetch('/carts', {method: 'POST', 
+                         headers: {'Content-Type': 'application/json'}, 
+                        body: JSON.stringify({user_id: user.id, postcard_id: postcardId})   })
+        const cartItem = await resp.json()
+        console.log(cartItem)
+        setCart([cartItem, ...cart])
+    }
+
+
 
     if(!user && !isLoading){
         history.push('/login')
@@ -47,7 +79,7 @@ function Home({user, setUser}){
                     <Checkout cart={cart}></Checkout>
                 </Route>
                 <Route path='/'>
-                    <PostcardList cart={cart} setCart={setCart}></PostcardList>
+                    <PostcardList cart={cart} setCart={setCart} addToCart={addToCart}></PostcardList>
                 </Route>
             </Switch>
         </>

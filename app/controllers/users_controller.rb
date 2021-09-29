@@ -17,6 +17,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def user_cart
+        user = User.find_by(id: params[:id])
+        render json: user.carts
+    end
+
     private
 
     def user_params

@@ -2,7 +2,7 @@ import { Button, Card, Box, Modal } from "@mui/material"
 import { useState } from 'react'
 
 
-function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
+function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToCart }){
    const [showDelete, setShowDelete] = useState(false)
    const [open, setOpen] = useState(false);
    const handleClose = () => setOpen(false);
@@ -12,7 +12,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    width: "70%",
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 1,
@@ -24,9 +24,11 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
         setPostcards(postcards.filter((pc)=> pc.id !== postcard.id ))
     }
 
-    function addToCart(){
-        setCart([postcard, ...cart])
-    }
+    // function addToCart(){
+        
+        
+    //     setCart([postcard, ...cart])
+    // }
 
     function showBig(){
         setOpen(true)
@@ -39,7 +41,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart }){
         <img onClick={showBig} width="100%" src={postcard.image_url}></img>
         {showDelete ? <>
                         <Button onClick={deletePostcard}> Delete </Button>
-                        <Button onClick={addToCart}>Add to Cart</Button>  
+                        <Button onClick={()=>addToCart(postcard.id)}>Add to Cart</Button>  
                         </> : null }
     </Card>
     <Modal

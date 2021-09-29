@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
+  resources :carts 
   resources :postcards
+
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
+  get '/usercart/:id', to: 'users#user_cart'
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
