@@ -17,7 +17,7 @@ function PostcardList({ cart, setCart, addToCart }){
     <Container maxWidth="lg"  sx={{ marginTop: "64px"}}>    
         <Grid container spacing={2}>
             {postcards.map((postcard)=>( 
-                <Grid item xs={4} >
+                <Grid key={postcard.id} item xs={6} >
                     <PostcardCard key ={postcard.id} postcard={postcard} postcards={postcards} setPostcards={setPostcards} cart={cart} setCart={setCart} addToCart={addToCart}/>
                 </Grid>
                 ))}

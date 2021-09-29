@@ -29,7 +29,7 @@ function Cart({ cart, setCart }){
         </Grid>
         <Box sx={{marginTop: 4, float: 'right'}}>
             <Typography>{cart.length > 0 ?  "Total:" + cart.length*pricePerPostcard : "You're Cart is Empty!"} </Typography>
-            <Button variant="contained" sx={{margin:3}} onClick={checkout}>Checkout</Button> 
+            {cart.length === 0 ? null : <Button variant="contained" sx={{margin:3}} onClick={checkout}>Checkout</Button> }
         </Box>
     </Container>)
 }

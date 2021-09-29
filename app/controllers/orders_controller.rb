@@ -15,12 +15,13 @@ skip_before_action :authorize
             op = OrderPostcard.create(order_id: order.id, postcard_id: cartItem.postcard_id)
             cartItem.destroy
         end
+        render json: order, status: :created
     end
 
-    # def destroy
-    #     order = Order.first
-    #     order.destroy
-    # end
+    def destroy
+        order = Order.first
+        order.destroy
+    end
 
     private 
     def order_params
