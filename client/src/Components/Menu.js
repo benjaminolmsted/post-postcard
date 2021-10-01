@@ -61,7 +61,7 @@ function Menu({ cart }){
           <List>
               <ListItem onClick={()=>goTo('/cart')} button key={"Cart"}>
                 <ListItemIcon>
-                <Badge  badgeContent={cart.length} color="primary">
+                <Badge  badgeContent={cart.reduce((prevVal, currVal) => prevVal + currVal.amount, 0 )} color="primary">
                   <ShoppingCartIcon />
                 </Badge>
                 </ListItemIcon>

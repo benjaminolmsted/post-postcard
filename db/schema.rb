@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_29_201737) do
+ActiveRecord::Schema.define(version: 2021_10_01_154623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_09_29_201737) do
     t.bigint "postcard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "amount"
     t.index ["postcard_id"], name: "index_carts_on_postcard_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_09_29_201737) do
     t.bigint "postcard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "amount"
     t.index ["order_id"], name: "index_order_postcards_on_order_id"
     t.index ["postcard_id"], name: "index_order_postcards_on_postcard_id"
   end
