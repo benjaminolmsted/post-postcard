@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import CheckoutForm from "./CheckoutForm"
 
 function Checkout({ cart, user }){
     const [step, setStep] = useState(0)
@@ -53,6 +54,8 @@ function Checkout({ cart, user }){
             {step < 2? <Button variant='contained' color='primary' onClick={next} sx={{float: 'right'}}>Next</Button>
                     : 
                     <Button variant='contained' color='primary' onClick={placeOrder} sx={{float: 'right'}}>Place Order</Button> }
+        
+        <CheckoutForm></CheckoutForm>
         </Container>
     )
 }

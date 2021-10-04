@@ -60,7 +60,16 @@ function PostcardGenerator({ user }){
         return Math.random()*max
     }
 
-    
+    function centeredCircles(){
+        let canvas = ref.current
+        let context = canvas.getContext('2d')
+        for(let i=0; i<53; i++){
+            context.fillStyle = randomPrimary()
+            context.beginPath()
+            context.arc(canvas.width/2+ randomInt(5), canvas.height/2+ randomInt(5), canvas.height/2-i*15, 0, 2 * Math.PI)
+             context.fill()
+        }
+    }
 
    function generatePostcard(){
         let canvas = ref.current
@@ -83,12 +92,7 @@ function PostcardGenerator({ user }){
             //context.fillRect(0, i, canvas.width, i+1)  
         }}   
         context.globalCompositeOperation = 'difference'
-        for(let i=0; i<53; i++){
-            context.fillStyle = randomPrimary()
-            context.beginPath()
-            context.arc(canvas.width/2+ randomInt(5), canvas.height/2+ randomInt(5), canvas.height/2-i*15, 0, 2 * Math.PI)
-             context.fill()
-        }
+        centeredCircles()
         // for(let i=0; i<canvas.width; i+=150 ){
         //     context.fillStyle = randomPrimary()
         //     context.beginPath()
