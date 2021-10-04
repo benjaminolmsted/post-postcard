@@ -35,9 +35,21 @@ function PostcardGenerator({ user }){
     })
 
     function randomPrimary(){
-       let colors = ['#00FFFF', '#FFFFFF', '#0000FF', '#FF00FF', '#FF0000', '#00FF00', '#FFFF00']
-       //let colors = ['#00FFFF']
+       //let colors = ['#00FFFF', '#FFFFFF', '#0000FF', '#FF00FF', '#FF0000', '#00FF00', '#FFFF00']
+       let colors = ['#00FFFF', '#FF00FF', '#FFFF00']
        return colors[Math.floor(Math.random()*colors.length)]
+    }
+
+    function makeRGBA(r, g, b, a){
+        return `rgba(${r}, ${g}, ${b}, ${a})`
+    }
+
+    function coinFlip(prob){
+        if(Math.random() > prob){
+            return 1
+        }else{
+            return 0
+        }
     }
 
     function randomInt(max){
@@ -55,25 +67,28 @@ function PostcardGenerator({ user }){
         let context = canvas.getContext('2d')
         context.globalCompositeOperation = 'difference'
         context.fillStyle = randomPrimary()
-        let dist = randomInt(55)
-        for(let i=0; i<canvas.width; i+=dist ){
-            
-        //    context.beginPath()
-        //     context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width/15), randomFloat(2 * Math.PI), randomFloat(2 * Math.PI))
-        //     context.fill()
-            if(i%16 === 0){
+
+        let radius = 50
+        let spread = radius
+        for(let k = 0; k < 10; k++){
+        for(let i=radius; i<canvas.width; i+=spread ){
+            for(let j = radius; j<canvas.height; j+=spread*2){
                 context.beginPath()
-                context.arc(randomInt(canvas.width), randomInt(canvas.height), randomInt(canvas.width), 0, 2 * Math.PI)
+                context.arc(i + randomInt(5), j+ randomInt(5), radius+ randomInt(25), 0, 2 * Math.PI)
                 context.fill()
+                context.fillStyle = makeRGBA(i%255, Math.abs((255-i))%255, j%255, 1)
+
             }
-            context.fillRect(i, 0, dist, randomInt(canvas.height)) 
+           // context.fillRect(i, 0, dist, randomInt(canvas.height)) 
             //context.fillRect(0, i, canvas.width, i+1)  
-            dist = randomInt(55)
+        }}   
+        context.globalCompositeOperation = 'difference'
+        for(let i=0; i<53; i++){
+            context.fillStyle = randomPrimary()
+            context.beginPath()
+            context.arc(canvas.width/2+ randomInt(5), canvas.height/2+ randomInt(5), canvas.height/2-i*15, 0, 2 * Math.PI)
+             context.fill()
         }
-        // for(let i=0; i<canvas.width; i+=150){
-        //     context.fillStyle = randomPrimary()
-        //     context.fillRect(0, i, canvas.width, i+150)
-        // }
         // for(let i=0; i<canvas.width; i+=150 ){
         //     context.fillStyle = randomPrimary()
         //     context.beginPath()
