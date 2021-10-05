@@ -10,6 +10,11 @@ class PostcardsController < ApplicationController
         render json: postcards
     end
 
+    def my_postcards
+        postcards = Postcard.where(user_id: session[:user_id])
+        render json: postcards
+    end
+
     def destroy
         postcard = Postcard.find(params[:id])
         postcard.destroy

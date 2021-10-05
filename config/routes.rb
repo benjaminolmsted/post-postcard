@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :carts 
   resources :postcards
 
+  get '/my-postcards', to: 'postcards#my_postcards'
+
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   get '/usercart/:id', to: 'users#user_cart'

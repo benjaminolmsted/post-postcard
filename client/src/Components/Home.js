@@ -64,13 +64,16 @@ function Home({user, setUser}){
                     <Cart cart={cart} setCart={setCart}/>
                 </Route>
                 <Route path="/checkout">
-                    <Checkout cart={cart} user={user}></Checkout>
+                    <Checkout cart={cart} user={user} setCart={setCart}></Checkout>
                 </Route>
                 <Route path='/orders'>
                     <Orders></Orders>
                 </Route>
+                <Route path='/my-postcards'>
+                    <PostcardList cart={cart} setCart={setCart} addToCart={addToCart} fetchURL={'/my-postcards'}></PostcardList>
+                </Route>
                 <Route path='/'>
-                    <PostcardList cart={cart} setCart={setCart} addToCart={addToCart}></PostcardList>
+                    <PostcardList cart={cart} setCart={setCart} addToCart={addToCart} fetchURL={'/postcards'}></PostcardList>
                 </Route>
             </Switch>
         </>

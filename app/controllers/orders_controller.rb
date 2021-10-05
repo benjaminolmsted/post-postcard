@@ -4,8 +4,7 @@ class OrdersController < ApplicationController
 
     def index
         orders = Order.all.where(user_id: session[:user_id])
-        #po = make_prodigi_order
-        
+        po = make_prodigi_order
         render json: orders
         
     end
@@ -71,9 +70,8 @@ class OrdersController < ApplicationController
                         ]
                     }
                 ]
-            },
-     :headers => { 'Content-Type' => 'application/json', "X-API-Key" => ENV['X-Pwinty-REST-API-Key'] } )
-      byebug  
+            }.to_json,
+     :headers => { 'Content-Type' => 'application/json', "X-API-Key" => ENV['X-Pwinty-REST-API-Key'] } )  
     end
 
 end

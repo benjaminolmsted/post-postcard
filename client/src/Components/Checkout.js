@@ -10,7 +10,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import CheckoutForm from "./CheckoutForm"
 
-function Checkout({ cart, user }){
+function Checkout({ cart, setCart, user }){
     const [step, setStep] = useState(0)
     const [address, setAddress] = useState({
         first_name: '',
@@ -30,11 +30,14 @@ function Checkout({ cart, user }){
         fetch('/orders', {method: 'POST', 
                         headers: {'Content-Type': 'application/json'}, 
                         body: JSON.stringify({...address, user_id: user.id})})
-        console.log({...address, user_id: user.id})
+        .then(resp => resp.json())
+        .then(data => {console.log(data)
+                      setCart([])
+        })
     }
 
 
-    const steps = ['Shipping address', 'Payment details', 'Review your order'];
+    const steps = ['Shipping address', 'Review your order'];
     return (
         <Container sx={{width: '600px', marginTop: "64px"}}>
         <Typography component="h1" variant="h4" align="center">
@@ -48,15 +51,12 @@ function Checkout({ cart, user }){
               ))}
             </Stepper>
             {step === 0 ? <AddressForm address={address} setAddress={setAddress}/> : null }
-            { step === 1? <PaymentForm /> : null }
-            {step === 2 ? <Review cart={cart} address={address}/> : null }
+            {step === 1 ? <Review cart={cart} address={address} placeOrder={placeOrder}/> : null }
             {step > 0 ? <Button variant='contained' color='primary' onClick={back}>Back</Button> : null }
-            {step < 2? <Button variant='contained' color='primary' onClick={next} sx={{float: 'right'}}>Next</Button>
+            {step < 1? <Button variant='contained' color='primary' onClick={next} sx={{float: 'right'}}>Next</Button>
                     : 
-                    <Button variant='contained' color='primary' onClick={placeOrder} sx={{float: 'right'}}>Place Order</Button> }
-        
-        <CheckoutForm></CheckoutForm>
-        </Container>
+                     null } {/* <Button variant='contained' color='primary' onClick={placeOrder} sx={{float: 'right'}}>Place Order</Button> } */}
+            </Container>
     )
 }
 

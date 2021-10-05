@@ -4,7 +4,12 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
-export default function CheckoutForm() {
+import { Button, Container } from "@mui/material";
+import { Box } from "@mui/system";
+
+
+
+export default function CheckoutForm({ placeOrder, total }) {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
@@ -20,7 +25,7 @@ export default function CheckoutForm() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({amount: 100})
+        body: JSON.stringify({amount: total * 100})
       })
       .then(res => {
         return res.json();
@@ -29,6 +34,7 @@ export default function CheckoutForm() {
         setClientSecret(data.clientSecret);
       });
   }, []);
+
   const cardStyle = {
     style: {
       base: {
@@ -46,12 +52,14 @@ export default function CheckoutForm() {
       }
     }
   };
+
   const handleChange = async (event) => {
     // Listen for changes in the CardElement
     // and display any errors as the customer types their card details
     setDisabled(event.empty);
     setError(event.error ? event.error.message : "");
   };
+
   const handleSubmit = async ev => {
     ev.preventDefault();
     setProcessing(true);
@@ -63,19 +71,27 @@ export default function CheckoutForm() {
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`);
       setProcessing(false);
+      console.log(payload.error.message);
     } else {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
+      placeOrder()
+      console.log("Placed Order")
     }
   };
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <Box sx={{width: "100%"}} >
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
-      <button
+      </Box>
+      <Button
+        onClick={handleSubmit}
         disabled={processing || disabled || succeeded}
         id="submit"
-      >
+        sx={{float: 'right'}}
+        variant="contained"
+        >
         <span id="button-text">
           {processing ? (
             <div className="spinner" id="spinner"></div>
@@ -83,7 +99,7 @@ export default function CheckoutForm() {
             "Pay now"
           )}
         </span>
-      </button>
+      </Button>
       {/* Show any error that happens when processing the payment */}
       {error && (
         <div className="card-error" role="alert">
@@ -91,6 +107,7 @@ export default function CheckoutForm() {
         </div>
       )}
       {/* Show a success message upon completion */}
+      <p>'Please enter your credit card details'</p>
       <p className={succeeded ? "result-message" : "result-message hidden"}>
         Payment succeeded, see the result in your
         <a

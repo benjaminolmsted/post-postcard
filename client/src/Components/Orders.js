@@ -20,7 +20,7 @@ function Orders(){
                 <Typography variant="h3">Orders</Typography>
                 {orders.map((order) =>{
                    return (
-                       <Card key={order.id}>
+                       <Card key={order.id} sx={{margin: '20px'}}>
                        <Grid container>
                         <Grid item xs={3}>
                         <Typography variant="h6">{`${order.first_name} ${order.last_name}`}</Typography>

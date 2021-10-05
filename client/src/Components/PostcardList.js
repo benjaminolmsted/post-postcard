@@ -3,14 +3,15 @@ import { Container, Grid } from "@mui/material"
 import { useEffect, useState } from 'react'
 
 
-function PostcardList({ cart, setCart, addToCart }){
+function PostcardList({ cart, setCart, addToCart, fetchURL }){
     const [postcards, setPostcards] = useState([])
    
         useEffect(()=>{
-            fetch("/postcards")
+            console.log(fetchURL)
+            fetch(fetchURL)
             .then((resp)=>resp.json())
             .then(postcards => setPostcards(postcards)) 
-        }, [])
+        }, [fetchURL])
 
    
    return (<>

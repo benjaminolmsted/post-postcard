@@ -3,7 +3,7 @@ import { Box } from "@mui/system"
 import PostcardCartCard from './PostcardCartCard'
 import { useHistory } from 'react-router-dom'
 
-const pricePerPostcard = 1.29;
+const pricePerPostcard = 2.19;
 
 function Cart({ cart, setCart }){
     const history = useHistory() 
