@@ -15,7 +15,7 @@ function PostcardList({ cart, setCart, addToCart, fetchURL }){
 
    
    return (<>
-    <Container maxWidth="lg"  sx={{ marginTop: "64px"}}>    
+    <Container maxWidth="lg"  sx={{ marginTop: "84px"}}>    
         <Grid container spacing={2}>
             {postcards.map((postcard)=>( 
                 <Grid key={postcard.id} item xs={6} >

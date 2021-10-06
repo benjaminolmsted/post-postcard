@@ -15,7 +15,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToC
     width: "70%",
     bgcolor: 'background.paper',
     boxShadow: 24,
-    p: 1,
+    bordeRadius: 0
   };
 
 
@@ -37,7 +37,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToC
     return (<>
     <Card raised onMouseEnter={() => setShowDelete(true)} 
     onMouseLeave={() => setShowDelete(false)}
-    sx={{ borderRadius: 0 }}>
+    sx={{ borderRadius: 0, height: '100%', padding: '0px' }}>
         <img onClick={showBig} width="100%" src={postcard.image_url}></img>
         {showDelete ? <>
                         <Button onClick={deletePostcard}> Delete </Button>
@@ -49,6 +49,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToC
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{ borderRadius: 0}}
       >
         <Box sx={style}>
          <img onClick={showBig} width="100%" src={postcard.image_url}></img>

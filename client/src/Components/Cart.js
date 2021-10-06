@@ -39,7 +39,7 @@ function Cart({ cart, setCart }){
     }
 
     return (    
-    <Container maxWidth="md"  sx={{ marginTop: "64px"}}>    
+    <Container maxWidth="md"  sx={{ marginTop: "84px"}}>    
         <Grid container spacing={2}>
             {cart.map((cartItem)=>( 
                 <Grid item xs={12} >
@@ -53,8 +53,8 @@ function Cart({ cart, setCart }){
                 ))}
         </Grid>
         <Box sx={{marginTop: 4, float: 'right'}}>
-            <Typography>{cart.length > 0 ?  "Total: " + calculateTotal() : "You're Cart is Empty!"} </Typography>
-            {cart.length === 0 ? null : <Button variant="contained" sx={{margin:3}} onClick={checkout}>Checkout</Button> }
+            <Typography >{cart.length > 0 ?  "Total: " + calculateTotal() : "You're Cart is Empty!"} </Typography>
+            {cart.length === 0 ? null : <Button variant="contained" sx={{float: 'right', margin:3}} onClick={checkout}>Checkout</Button> }
         </Box>
     </Container>)
 }

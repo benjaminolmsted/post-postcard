@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { Button, Container } from '@mui/material'
+import { Button, Container, Card } from '@mui/material'
 
 function PostcardGenerator({ user }){
     let ref = useRef()
@@ -110,20 +110,34 @@ function PostcardGenerator({ user }){
         context.globalCompositeOperation = 'normal'
 
         for(let i = 0; i < canvas.height; i++){
-            if(i%39==0){
+            if(i%40==0){
                 context.fillStyle = '#000000' //randomPrimary()
                 context.fillRect(0, i, canvas.width, 15)
             }
         }
         for(let i = 0; i < canvas.width; i++){
-            if(i%39==0){
+            if(i%40==0){
                 context.fillStyle = '#000000' //randomPrimary()
                 context.fillRect(i, 0, 15, canvas.height)
             }
         }
     }
+
+    function pixelCoverup(color= randomPrimary(), pixelSize= 100, pixelProb= .5){
+        let canvas = ref.current
+        let context = canvas.getContext('2d')
+        context.fillStyle = color
+        for(let i = 0; i < canvas.width; i+=pixelSize){
+            for(let j = 0; j < canvas.height; j+=pixelSize){
+                if(coinFlip(pixelProb)){
+                    context.fillRect(i, j, pixelSize, pixelSize)
+                }
+            }
+        }
+    }
+
     function randomGenerator(){
-        let generators = [noisyCircles, centeredCircles, randomCircles, blackBars]
+        let generators = [noisyCircles, centeredCircles, randomCircles, blackBars, pixelCoverup]
         return generators[Math.floor(Math.random()*generators.length)]
     }
 
@@ -133,10 +147,12 @@ function PostcardGenerator({ user }){
         let context = canvas.getContext('2d')
         context.globalCompositeOperation = 'difference'
         context.fillStyle = randomPrimary()
-        for(let i = 0; i < 4; i++){
+        for(let i = 0; i < 3; i++){
             context.globalCompositeOperation = 'difference'
 
             randomGenerator()()
+            context.globalCompositeOperation = 'difference'
+            
         }
         //blackBars()
    }
@@ -191,7 +207,9 @@ function PostcardGenerator({ user }){
 
     return (<>
         <Container maxWidth="lg"  sx={{ marginTop: "84px"}}>
+        <Card raised sx={{borderRadius: '0px', height: '800px'}}>
          <canvas ref={ref} style ={{width: "1200px", height: "800px"}}></canvas>
+         </Card>
          <Button onClick={saveImage}>Save</Button>
          <Button onClick={generateNewPostcard}>Generate New</Button>
          <Button onClick={generatePostcard}>Generate Over</Button>
