@@ -41,7 +41,7 @@ function Menu({ cart }){
                 </ListItemIcon>
                 <ListItemText primary={"All postcards"} />
               </ListItem>
-              <ListItem onClick={()=>goTo('/my-postcards')} button key={"My postcards"}>
+              <ListItem onClick={()=>goTo('/my_postcards')} button key={"My postcards"}>
                 <ListItemIcon>
                   <PanoramaIcon />
                 </ListItemIcon>

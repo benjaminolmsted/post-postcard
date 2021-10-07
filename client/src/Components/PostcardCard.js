@@ -50,6 +50,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToC
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={{ borderRadius: 0}}
+        style={{}}
       >
         <Box sx={style}>
          <img style={{padding: '0px'}} width="100%" src={postcard.image_url}></img>

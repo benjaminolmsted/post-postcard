@@ -27,7 +27,6 @@ function Login({ setUser }){
             const error = await response.json()
             console.log(error)
         }
-        
     }
 
 

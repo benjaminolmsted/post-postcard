@@ -69,7 +69,7 @@ function Home({user, setUser}){
                 <Route path='/orders'>
                     <Orders></Orders>
                 </Route>
-                <Route path='/my-postcards'>
+                <Route path='/my_postcards'>
                     <PostcardList cart={cart} setCart={setCart} addToCart={addToCart} fetchURL={'/my-postcards'}></PostcardList>
                 </Route>
                 <Route path='/'>
