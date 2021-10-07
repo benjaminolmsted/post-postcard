@@ -18,17 +18,10 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToC
     bordeRadius: 0,
   };
 
-
     function deletePostcard(){
         fetch(`/postcards/${postcard.id}`, {method: "DELETE"})
         setPostcards(postcards.filter((pc)=> pc.id !== postcard.id ))
     }
-
-    // function addToCart(){
-        
-        
-    //     setCart([postcard, ...cart])
-    // }
 
     function showBig(){
         setOpen(true)
@@ -52,7 +45,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToC
         sx={{ borderRadius: 0}}
         style={{}}
       >
-        <Box sx={style}>
+        <Box style={{height: '92.5%'}} sx={style}>
          <img style={{padding: '0px'}} width="100%" src={postcard.image_url}></img>
         </Box>
       </Modal>

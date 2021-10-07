@@ -108,7 +108,8 @@ export default function CheckoutForm({ placeOrder, total }) {
         </div>
       )}
       {/* Show a success message upon completion */}
-      <p>Please enter your credit card details. Payments handled with Stripe.</p>
+      <p>Please enter your credit card details. Use 4242 4242 4242 4242  for a succesful payment to stripe sandbox.</p>
+      <p>Payments handled with Stripe.</p>
       
     </form>
   );
