@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
                 }
                 )
         end
-        prodigi_order = make_prodigi_order(items)
+        prodigi_order = make_prodigi_order(items, params)
         render json: {order: order, prodigi_order: prodigi_order}.to_json, status: :created
     end
 
@@ -51,20 +51,20 @@ class OrdersController < ApplicationController
         params.permit(:user_id, :first_name, :last_name, :email, :address_1, :address_2, :city, :state, :zip, :country)
     end
 
-    def make_prodigi_order(items)
+    def make_prodigi_order(items, post_params)
         response = HTTParty.post("https://api.sandbox.prodigi.com/v4.0/Orders", 
             :body => {
                 "merchantReference": "MyMerchantReference1",
                 "shippingMethod": "Overnight",
                 "recipient": {
-                    "name": "Mr Testtolab",
+                    "name": post_params[:first_name] + ' ' + post_params[:last_name],
                     "address": {
-                        "line1": "14 test place",
-                        "line2": "test",
-                        "postalOrZipCode": "12345",
-                        "countryCode": "US",
-                        "townOrCity": "somewhere",
-                        "stateOrCounty": "california"
+                        "line1": post_params[:address_1],
+                        "line2": post_params[:address_2],
+                        "postalOrZipCode": post_params[:zip],
+                        "countryCode": post_params[:country],
+                        "townOrCity": post_params[:city],
+                        "stateOrCounty": post_params[:state]
                     }
                 },
                 "items": items

@@ -8,8 +8,8 @@ import Logout from './Logout'
 
 export default function NavBar({ setUser }) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <Box >
+      <AppBar position="fixed" style={{background: '#c5c5c5'}} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link href='/' color="inherit">{ 'Post-a-Card' }</Link>

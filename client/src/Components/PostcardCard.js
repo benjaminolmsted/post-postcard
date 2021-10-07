@@ -41,7 +41,7 @@ function PostcardCard({ postcard, postcards, setPostcards, cart, setCart, addToC
         <img onClick={showBig} width="100%" src={postcard.image_url}></img>
         {showDelete ? <>
                         <Button onClick={deletePostcard}> Delete </Button>
-                        <Button onClick={()=>addToCart(postcard.id)}>Add to Cart</Button>  
+                        <Button color="secondary" onClick={()=>addToCart(postcard.id)}>Add to Cart</Button>  
                         </> : null }
     </Card>
     <Modal

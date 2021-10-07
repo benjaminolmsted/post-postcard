@@ -193,6 +193,7 @@ function PostcardGenerator({ user }){
      const uploadToAWS = async(blob, directory) => {
         const  data  = await fetch(`/presign?filename=postcard&fileType=image/png&directory=${directory}`, 
                                     {method: "GET"})
+        console.log(data);
         const json = await data.json();
         const { post_url, get_url } = json;
         const awsResp = await fetch(post_url, 
@@ -210,11 +211,11 @@ function PostcardGenerator({ user }){
         <Card raised sx={{borderRadius: '0px', height: '800px'}}>
          <canvas ref={ref} style ={{width: "1200px", height: "800px"}}></canvas>
          </Card>
-         <Button onClick={saveImage}>Save</Button>
-         <Button onClick={generateNewPostcard}>Generate New</Button>
-         <Button onClick={generatePostcard}>Generate Over</Button>
+         <Button variant='contained' color="secondary" onClick={saveImage}>Save</Button>
+         <Button color="secondary" onClick={generateNewPostcard}>Generate New</Button>
+         <Button color="secondary" onClick={generatePostcard}>Generate Over</Button>
 
-         <Button onClick={clearPostcard}>Clear</Button>
+         <Button color="secondary" onClick={clearPostcard}>Clear</Button>
         </Container>
     </>)
 }

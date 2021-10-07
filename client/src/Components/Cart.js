@@ -54,7 +54,7 @@ function Cart({ cart, setCart }){
         </Grid>
         <Box sx={{marginTop: 4, float: 'right'}}>
             <Typography >{cart.length > 0 ?  "Total: " + calculateTotal() : "You're Cart is Empty!"} </Typography>
-            {cart.length === 0 ? null : <Button variant="contained" sx={{float: 'right', margin:3}} onClick={checkout}>Checkout</Button> }
+            {cart.length === 0 ? null : <Button color='secondary' variant="contained" sx={{float: 'right', margin:3}} onClick={checkout}>Checkout</Button> }
         </Box>
     </Container>)
 }

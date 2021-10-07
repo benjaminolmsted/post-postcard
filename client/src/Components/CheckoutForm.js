@@ -107,7 +107,7 @@ export default function CheckoutForm({ placeOrder, total }) {
         </div>
       )}
       {/* Show a success message upon completion */}
-      <p>'Please enter your credit card details'</p>
+      <p>Please enter your credit card details. Payments handled with Stripe.</p>
       <p className={succeeded ? "result-message" : "result-message hidden"}>
         Payment succeeded, see the result in your
         <a

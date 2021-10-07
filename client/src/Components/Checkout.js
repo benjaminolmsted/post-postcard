@@ -54,7 +54,7 @@ function Checkout({ cart, setCart, user }){
             {step === 1 ? <Review cart={cart} address={address} placeOrder={placeOrder}/> : null }
             {step ===2 ? <Confirmation orderData={orderData}></Confirmation> : null}
             {step > 0 && step < 2 ? <Button variant='contained' color='primary' onClick={back}>Back</Button> : null }
-            {step < 1? <Button variant='contained' color='primary' onClick={next} sx={{float: 'right'}}>Next</Button>
+            {step < 1? <Button variant='contained' color='secondary' onClick={next} sx={{float: 'right'}}>Next</Button>
                     : 
                      null } {/* <Button variant='contained' color='primary' onClick={placeOrder} sx={{float: 'right'}}>Place Order</Button> } */}
             </Container>
