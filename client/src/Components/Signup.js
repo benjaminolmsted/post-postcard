@@ -9,13 +9,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState } from 'react'
-
+import { useHistory } from 'react-router-dom'
 
 function Signup({ setUser }){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    
+    const history = useHistory()
     
     async function handleSubmit(e){
         e.preventDefault()
@@ -27,6 +27,7 @@ function Signup({ setUser }){
         if(response.ok){
             const user = await response.json()
             setUser(user)
+            history.push('/')
         }else{
             console.log(response)
         }

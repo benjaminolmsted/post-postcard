@@ -91,12 +91,13 @@ export default function CheckoutForm({ placeOrder, total }) {
         id="submit"
         sx={{float: 'right'}}
         variant="contained"
+        color="secondary"
         >
         <span id="button-text">
           {processing ? (
             <div className="spinner" id="spinner"></div>
           ) : (
-            "Pay now"
+            "Place Order"
           )}
         </span>
       </Button>
@@ -108,15 +109,7 @@ export default function CheckoutForm({ placeOrder, total }) {
       )}
       {/* Show a success message upon completion */}
       <p>Please enter your credit card details. Payments handled with Stripe.</p>
-      <p className={succeeded ? "result-message" : "result-message hidden"}>
-        Payment succeeded, see the result in your
-        <a
-          href={`https://dashboard.stripe.com/test/payments`}
-        >
-          {" "}
-          Stripe dashboard.
-        </a> Refresh the page to pay again.
-      </p>
+      
     </form>
   );
 }

@@ -81,10 +81,10 @@ function PostcardGenerator({ user }){
         let context = canvas.getContext('2d')
         let radius = 50
         let spread = radius
-        for(let k = 0; k < 10; k++){
+        for(let k = 0; k < 5; k++){
             for(let i=radius; i<canvas.width; i+=spread*2 ){
                 for(let j = radius; j<canvas.height; j+=spread*2){
-                    context.fillStyle = makeRGBA(j%255, 0, i%255 , 1)
+                    context.fillStyle = makeRGBA(j%255, 255/k, i%255 , 1)
                     context.beginPath()
                     context.arc(i + randomInt(5), j+ randomInt(5), radius+ randomInt(25), 0, 2 * Math.PI)
                     context.fill()
