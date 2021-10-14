@@ -193,7 +193,6 @@ function PostcardGenerator({ user }){
      const uploadToAWS = async(blob, directory) => {
         const  data  = await fetch(`/presign?filename=postcard&fileType=image/png&directory=${directory}`, 
                                     {method: "GET"})
-        console.log(data);
         const json = await data.json();
         const { post_url, get_url } = json;
         const awsResp = await fetch(post_url, 

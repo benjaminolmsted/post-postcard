@@ -42,7 +42,6 @@ function Home({user, setUser}){
                          headers: {'Content-Type': 'application/json'}, 
                         body: JSON.stringify({user_id: user.id, postcard_id: postcardId})   })
         const cartItem = await resp.json()
-        console.log(cartItem)
         setCart([cartItem, ...cart])
     }
 

@@ -7,7 +7,6 @@ function AddressForm({ address, setAddress}) {
 
   function onTextChange(e){
     setAddress({...address, [e.target.name]: e.target.value});
-    //console.log(address)
   }
 
   return (

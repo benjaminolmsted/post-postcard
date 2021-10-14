@@ -29,7 +29,7 @@ function Signup({ setUser }){
             setUser(user)
             history.push('/')
         }else{
-            console.log(response)
+    
         }
     }
 

@@ -25,7 +25,6 @@ function Login({ setUser }){
            history.push('/')
         }else{
             const error = await response.json()
-            console.log(error)
         }
     }
 

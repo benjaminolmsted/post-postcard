@@ -7,7 +7,6 @@ function PostcardList({ cart, setCart, addToCart, fetchURL }){
     const [postcards, setPostcards] = useState([])
    
         useEffect(()=>{
-            console.log(fetchURL)
             fetch(fetchURL)
             .then((resp)=>resp.json())
             .then(postcards => setPostcards(postcards)) 

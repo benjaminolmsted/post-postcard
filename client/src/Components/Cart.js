@@ -34,7 +34,6 @@ function Cart({ cart, setCart }){
     }
 
     function calculateTotal(){
-        console.log(cart)
         return cart.reduce((prevVal, currVal) => prevVal + currVal.amount, 0 )*pricePerPostcard
     }
 

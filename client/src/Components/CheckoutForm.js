@@ -71,13 +71,11 @@ export default function CheckoutForm({ placeOrder, total }) {
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`);
       setProcessing(false);
-      console.log(payload.error.message);
     } else {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
       placeOrder()
-      console.log("Placed Order")
     }
   };
   return (

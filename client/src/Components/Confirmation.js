@@ -6,7 +6,6 @@ import { Box } from "@mui/system"
 
 function Confirmation({orderData}){
     const { prodigi_order, order } = orderData
-    console.log(orderData)
     return (
     <Container>
        <Box>

@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react'
 function Orders(){
     const [orders, setOrders] = useState([])
 
-        useEffect(() => {
+    useEffect(() => {
         fetch('/orders')
         .then(response => response.json())
-        .then(orders=> {console.log(orders) 
-                        setOrders(orders)})
+        .then(orders=> {setOrders(orders)})
     }, [])
     
     
